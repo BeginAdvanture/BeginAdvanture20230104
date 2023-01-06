@@ -54,7 +54,7 @@ public class UsrArticleController {
     Article article = getArticle(id);
     article.setTitle(title);
     article.setBody(body);
-    
+
   }
 
   ///////////////////////////////////// 매서드
@@ -65,6 +65,18 @@ public class UsrArticleController {
 
     return article;
   }
+
+
+  @RequestMapping("/usr/article/getArticle")
+  @ResponseBody
+  public Object getArticleAction(int id) {
+    Article article = getArticle(id);
+    if( article == null){
+      return  id + "게시물이 존재하지 않습니다.";
+    }
+    return article;
+  }
+
 
   @RequestMapping("/usr/article/getarticles")
   @ResponseBody
@@ -77,7 +89,7 @@ public class UsrArticleController {
     Article article = getArticle(id)
 
     if( article == null){
-      return  id + "게시물 존재하지 않습니다.";
+      return  id + "게시물이 존재하지 않습니다.";
     }
     deleteArticle(id);
 
@@ -90,7 +102,7 @@ public class UsrArticleController {
     Article article = getArticle(id);
 
     if( article == null){
-      return  id + "게시물을 수정하였습니다.";
+      return  id + "게시물이 존재하지 않습니다.";
     }
     modifyArticle(id,title,body);
     return id + "게시물을 수정하였습니다.";
