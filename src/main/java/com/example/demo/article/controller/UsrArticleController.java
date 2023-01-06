@@ -29,6 +29,7 @@ public class UsrArticleController {
       writeArticle(title,body);
     }
   }
+
   private Article writeArticle(String title, String body) {
     int id = articleLastId +1;
     Article article = new Article(id,title,body);
@@ -36,6 +37,21 @@ public class UsrArticleController {
     articleLastId = id;
     return  article;
   }
+
+  private Article getArticle(int id) {
+    for (Article artile : articles){
+      if(artile.getId() == id){
+        return article;
+      }
+    }
+    return null;
+  }
+
+  private void deleteArticle(int id) {
+    Article article = getArticle(id);
+    articles.remove(article);
+  }
+
 
   @RequestMapping("/usr/article/doAdd")
   @ResponseBody
@@ -50,4 +66,19 @@ public class UsrArticleController {
   public List<Article> getarticles() {
     return articles;
   }
+  @RequestMapping("/usr/article/doDeleate")
+  @ResponseBody
+  public String doDeleate(int id) {
+    Article article = getArticle(id)
+
+    if( article == null){
+      return  id + "게시물 존재하지 않습니다.";
+    }
+    deleteArticle(id);
+
+    return id + "ID가 삭제되었습니다.";
+  }
+
+
+
 }
