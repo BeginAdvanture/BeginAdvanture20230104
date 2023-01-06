@@ -2,7 +2,6 @@ package com.example.demo.article.controller;
 
 import com.example.demo.article.vo.Article;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -51,8 +50,14 @@ public class UsrArticleController {
     Article article = getArticle(id);
     articles.remove(article);
   }
+  private void modifyArticle(int id, String title, String body) {
+    Article article = getArticle(id);
+    article.setTitle(title);
+    article.setBody(body);
+    
+  }
 
-
+  ///////////////////////////////////// 매서드
   @RequestMapping("/usr/article/doAdd")
   @ResponseBody
   public Article doAdd(String title, String body) {
@@ -77,6 +82,18 @@ public class UsrArticleController {
     deleteArticle(id);
 
     return id + "ID가 삭제되었습니다.";
+  }
+
+  @RequestMapping("/usr/article/doModify")
+  @ResponseBody
+  public String doModify(int id,String title,String body) {
+    Article article = getArticle(id);
+
+    if( article == null){
+      return  id + "게시물을 수정하였습니다.";
+    }
+    modifyArticle(id,title,body);
+    return id + "게시물을 수정하였습니다.";
   }
 
 
