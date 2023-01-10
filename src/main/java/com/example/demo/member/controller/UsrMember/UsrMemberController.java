@@ -38,7 +38,10 @@ public class UsrMemberController {
       return "email 입력 해주세요.";
     }
     if (id == -1){
-      return "해당 아이디는 이미 사용중입니다.";
+      return Ut.f("해당 (%s)아이디는 이미 사용중입니다.",loginId);
+    }
+    if (id == -2){
+      return Ut.f("해당 (%s)이름과 (%s) 이메일은 이미 사용중입니다.",name,email);
     }
 
     Member member = memberService.getMemberById(id);

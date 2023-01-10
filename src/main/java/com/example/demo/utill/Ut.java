@@ -1,5 +1,7 @@
 package com.example.demo.utill;
 
+import java.text.Format;
+
 public class Ut {
   public static boolean empty(Object obj) {
     if(obj == null){
@@ -14,4 +16,7 @@ public class Ut {
 
   }
 
+  public static String f(String format, Object... args) {
+    return String.format(format,args);
+  }
 }
