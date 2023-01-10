@@ -5,6 +5,7 @@ spring:
   profiles:
   active: dev
   datasource:
-      url: jdbc:mysql://127.0.0.1:3306/exam_2023?useUnicode=true&characterEncoding=utf8&autoReconnect=true&&serverTimezone=Asia/Seoul
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://117.111.10.96:3306/exam_2023?useUnicode=true&characterEncoding=utf8&autoReconnect=true&&serverTimezone=Asia/Seoul
       username: root
       password:
