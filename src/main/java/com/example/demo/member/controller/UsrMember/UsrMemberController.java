@@ -3,6 +3,7 @@ package com.example.demo.member.controller.UsrMember;
 import com.example.demo.article.vo.Article;
 import com.example.demo.member.controller.Service.MemberService;
 import com.example.demo.member.vo.Member;
+import com.example.demo.utill.Ut;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,26 +19,22 @@ public class UsrMemberController {
   public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email)
   {
     int id = memberService.join( loginId,  loginPw,  name, nickname, cellphoneNo, email);
-    if (loginId == null){
+    if (Ut.empty(loginId)){
       return "loginId를 입력 해주세요.";
     }
-
-    if (loginId == null){
-      return "loginId를 입력 해주세요.";
-    }
-    if (loginPw == null){
+    if (Ut.empty(loginPw)){
       return "loginPw 입력 해주세요.";
     }
-    if (name == null){
+    if (Ut.empty(name)){
       return "name 입력 해주세요.";
     }
-    if (nickname == null){
+    if (Ut.empty(nickname)){
       return "nickname 입력 해주세요.";
     }
-    if (cellphoneNo == null){
+    if (Ut.empty(cellphoneNo)){
       return "cellphoneNo 입력 해주세요.";
     }
-    if (email == null){
+    if (Ut.empty(email)){
       return "email 입력 해주세요.";
     }
     if (id == -1){
