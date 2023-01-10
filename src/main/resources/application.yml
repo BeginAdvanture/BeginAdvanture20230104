@@ -1,1 +1,10 @@
-
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://117.111.10.96:3306/exam_2023?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password: root

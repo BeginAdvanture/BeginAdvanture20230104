@@ -1,2 +1,26 @@
-package com.example.demo.member.controller.Repository;public class MemberRepository {
+package com.example.demo.member.controller.Repository;
+
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+@Mapper
+public interface MemberRepository {
+  @Insert("""
+      INSERT INT() 'member'
+      SET regDate = NOW(),
+      updateDate = NOW(),
+      loginId = #{loginId},
+      loginPw = #{loginPw},
+      `name` = #{name},
+      `nickname` = #{nickname},
+      cellphoneNo = #{cellphoneNo},
+      email = #{email}
+      """
+  )
+  public void join(@Param("loginId") String loginId, @Param("loginPw") String loginPw,
+                   @Param("name") String name,
+                   @Param("nickname") String nickname, @Param("cellphoneNo")String cellphoneNo,
+                   @Param("email") String email);
+
 }
