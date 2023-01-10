@@ -1,7 +1,7 @@
-package com.example.demo.member.controller.Service;
+package com.example.demo.service;
 
-import com.example.demo.member.controller.Repository.MemberRepository;
-import com.example.demo.member.vo.Member;
+import com.example.demo.repository.MemberRepository;
+import com.example.demo.vo.Member;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,8 +1,7 @@
-package com.example.demo.member.controller.UsrMember;
+package com.example.demo.controller;
 
-import com.example.demo.article.vo.Article;
-import com.example.demo.member.controller.Service.MemberService;
-import com.example.demo.member.vo.Member;
+import com.example.demo.service.MemberService;
+import com.example.demo.vo.Member;
 import com.example.demo.utill.Ut;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

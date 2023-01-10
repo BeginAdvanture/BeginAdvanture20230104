@@ -1,10 +1,8 @@
-package com.example.demo.article.repository;
+package com.example.demo.repository;
 
-import com.example.demo.article.vo.Article;
+import com.example.demo.vo.Article;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Mapper

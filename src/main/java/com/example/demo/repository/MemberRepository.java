@@ -1,6 +1,6 @@
-package com.example.demo.member.controller.Repository;
+package com.example.demo.repository;
 
-import com.example.demo.member.vo.Member;
+import com.example.demo.vo.Member;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
