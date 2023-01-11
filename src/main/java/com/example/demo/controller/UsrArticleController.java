@@ -4,6 +4,7 @@ import com.example.demo.service.ArticleService;
 import com.example.demo.utill.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,17 @@ public class UsrArticleController {
   ///////////////////////////////////// 매서드
   @RequestMapping("/usr/article/doAdd")
   @ResponseBody
-  public ResultData doAdd(String title, String body) {
+  public ResultData doAdd(HttpSession httpSession, String title, String body) {
+    int loginedMemberId = 0;
+    boolean isLogined = false;
+
+    if(httpSession.getAttribute("loginMemberId")!=null){
+      isLogined = true;
+      loginedMemberId = (int) httpSession.getAttribute("logindMemberId");
+    }
+    if(isLogined==false){
+      return ResultData.from("F-A","로그인 후 이용하세요");
+    }
     if(Ut.empty(title)){
       return ResultData.from("F-1","title을 입력해주세요");
     }
@@ -30,7 +41,7 @@ public class UsrArticleController {
     }
 
 
-    ResultData<Integer> writeArticleRd = articleService.writeArticle(title,body);
+    ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId,title,body);
     int id = writeArticleRd.getData1();
     Article article = articleService.getArticle(id);
     return ResultData.from(writeArticleRd.getResultCode(),writeArticleRd.getMsg(),article);

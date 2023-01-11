@@ -85,3 +85,8 @@ cellphoneNo = '010222222',
 email = 'ssfu777@gmail.com';
 
 SELECT * FROM `member`;
+
+
+SELECT * FROM `member`;
+#게시물 회원정보 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`

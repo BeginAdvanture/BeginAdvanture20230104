@@ -47,7 +47,7 @@ public class UsrMemberController {
     Member member = memberService.getMemberById(joinRd.getData1());
     return ResultData.newData(joinRd,member);
   }
-/////////////////////////
+///////////////////////// LogID
   @RequestMapping("/usr/member/doLogin")
   @ResponseBody
   public ResultData doLogin(HttpSession httpSession, String loginId, String loginPw)
@@ -76,5 +76,23 @@ public class UsrMemberController {
     httpSession.setAttribute("loginMemberID",member.getId());
 
     return ResultData.from("s-1",Ut.f("%s님 환영합니다",member.getNickname()));
+  }
+  ///////로그아웃
+  @RequestMapping("/usr/member/doLogout")
+  @ResponseBody
+  public ResultData doLogout(HttpSession httpSession)
+  {
+    boolean isLogout = false;
+
+    if(httpSession.getAttribute("loginMemberId")==null){
+      isLogout = true;
+    }
+    if(isLogout){
+      return ResultData.from("S-1","이미 로그아웃 되었습니다.");
+    }
+
+    httpSession.removeAttribute("loginMemberID");
+
+    return ResultData.from("s-2","로그아웃 되었습니다");
   }
 }
