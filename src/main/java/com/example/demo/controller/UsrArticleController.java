@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 @Controller
@@ -21,10 +22,19 @@ public class UsrArticleController {
   ///////////////////////////////////// 매서드
   @RequestMapping("/usr/article/doAdd")
   @ResponseBody
-  public Article doAdd(String title, String body) {
-    int id = articleService.writeArticle(title,body);
+  public ResultData doAdd(String title, String body) {
+    if(Ut.empty(title)){
+      return ResultData.from("F-1","title을 입력해주세요");
+    }
+    if(Ut.empty(body)){
+      return ResultData.from("F-2","body를 입력해주세요");
+    }
+
+
+    ResultData writeArticleRd = articleService.writeArticle(title,body);
+    int id = (int)writeArticleRd.getData1();
     Article article = articleService.getArticle(id);
-    return article;
+    return ResultData.from(writeArticleRd.getResultCode(),writeArticleRd.getMsg(),article);
   }
 
 
@@ -41,8 +51,9 @@ public class UsrArticleController {
 
   @RequestMapping("/usr/article/getarticles")
   @ResponseBody
-  public List<Article> getarticles() {
-    return articleService.getArticles();
+  public ResultData getarticles() {
+    List<Article> articles = articleService.getArticles();
+    return ResultData.from("S-1","게시물 리스트입니다.",articles);
   }
   @RequestMapping("/usr/article/doDeleate")
   @ResponseBody

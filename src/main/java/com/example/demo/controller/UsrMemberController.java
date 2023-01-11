@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.service.MemberService;
 import com.example.demo.vo.Member;
 import com.example.demo.utill.Ut;
+import com.example.demo.vo.ResultData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,35 +16,34 @@ public class UsrMemberController {
 
   @RequestMapping("/usr/member/doJoin")
   @ResponseBody
-  public Object doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email)
+  public ResultData doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo, String email)
   {
-    int id = memberService.join( loginId,  loginPw,  name, nickname, cellphoneNo, email);
+
     if (Ut.empty(loginId)){
-      return "loginId를 입력 해주세요.";
+      return ResultData.from("F-1","loginId를 입력 해주세요.");
     }
     if (Ut.empty(loginPw)){
-      return "loginPw 입력 해주세요.";
+      return ResultData.from("F-2","loginPw 입력 해주세요.");
     }
     if (Ut.empty(name)){
-      return "name 입력 해주세요.";
+      return ResultData.from("F-3","name 입력 해주세요.");
     }
     if (Ut.empty(nickname)){
-      return "nickname 입력 해주세요.";
+      return ResultData.from("F-4","nickname 입력 해주세요.");
     }
     if (Ut.empty(cellphoneNo)){
-      return "cellphoneNo 입력 해주세요.";
+      return ResultData.from("F-5","cellphoneNo 입력 해주세요.");
     }
     if (Ut.empty(email)){
-      return "email 입력 해주세요.";
-    }
-    if (id == -1){
-      return Ut.f("해당 (%s)아이디는 이미 사용중입니다.",loginId);
-    }
-    if (id == -2){
-      return Ut.f("해당 (%s)이름과 (%s) 이메일은 이미 사용중입니다.",name,email);
+      return ResultData.from("F-6","email 입력 해주세요.");
     }
 
-    Member member = memberService.getMemberById(id);
-    return member;
+    ResultData joinRd = memberService.join( loginId,  loginPw,  name, nickname, cellphoneNo, email);
+    if (joinRd.isFail()){
+      return joinRd;
+    }
+
+    Member member = memberService.getMemberById((int)joinRd.getData1());
+    return ResultData.newData(joinRd,member);
   }
 }
