@@ -3,6 +3,14 @@ server:
 spring:
   profiles:
     active: dev
+  devtools:
+    livereload:
+      enabled: true
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    static-location: classpath:/static/
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mysql://117.111.10.96:3306/exam_2023?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
