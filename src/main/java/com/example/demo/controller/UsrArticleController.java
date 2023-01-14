@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.example.demo.service.ArticleService;
 import com.example.demo.utill.Ut;
 import com.example.demo.vo.Article;
@@ -59,11 +60,13 @@ public class UsrArticleController {
   }
 
 
-  @RequestMapping("/usr/article/getArticles")
-  @ResponseBody
-  public ResultData<List<Article>> getArticles() {
+  @RequestMapping("/usr/article/list")
+
+  public String showList(Model model) {
     List<Article> articles = articleService.getArticles();
-    return ResultData.from("S-1","게시물 리스트입니다.","articles",articles);
+    model.addSub;
+
+    return "usr/article/list";
   }
   @RequestMapping("/usr/article/doDelete")
   @ResponseBody
