@@ -44,14 +44,14 @@ public class UsrArticleController {
 
     ResultData<Integer> writeArticleRd = articleService.writeArticle(loginedMemberId,title,body);
     int id = writeArticleRd.getData1();
-    Article article = articleService.getArticle(id);
+    Article article = articleService.getForPrintArticle(id);
     return ResultData.newData(writeArticleRd,"article",article);
   }
 
 
   @RequestMapping("/usr/article/detail")
   public String showDetail(Model model,int id) {
-    Article article = articleService.getArticle(id);
+    Article article = articleService.getForPrintArticle(id);
    //model.addAttribute("article",article);
     return "/usr/article/detail";
   }
@@ -60,15 +60,15 @@ public class UsrArticleController {
   @RequestMapping("/usr/article/list")
 
   public String showList(Model model) {
-    List<Article> articles = articleService.getArticles();
-    //model.addAttribute
+    List<Article> articles = articleService.getForPrintArticles();
+    //model.addAttribute("article",article);
 
     return "usr/article/list";
   }
   @RequestMapping("/usr/article/doDelete")
   @ResponseBody
   public ResultData<Integer> doDelete(HttpSession httpSession,int id) {
-    Article article = articleService.getArticle(id);
+    Article article = articleService.getForPrintArticle(id);
     int loginedMemberId = 0;
     boolean isLogined = false;
 
@@ -93,7 +93,7 @@ public class UsrArticleController {
   @RequestMapping("/usr/article/doModify")
   @ResponseBody
   public ResultData<Integer> doModify(HttpSession httpSession, int id,String title,String body) {
-    Article article = articleService.getArticle(id);
+    Article article = articleService.getForPrintArticle(id);
 
     if( article == null){
       return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.",id));

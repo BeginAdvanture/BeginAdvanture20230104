@@ -31,7 +31,7 @@
             <th>${article.updateDate}"</th>
             <th>${article.extra__writerName}"</th>
             <th>${article.title}"</th>
-            <th><a class="hover: underline" href="../article/detail?id=${article.id}" ></a></th>
+            <th><a class ="btn-text-link" href="../article/detail?id=${article.id}" ></a></th>
           </tr>
         </c:forEach>
         </tbody>

@@ -19,3 +19,11 @@ html > body{
     border: 1px solid blak;
     padding: 10px
 }
+.btn-text-link{
+    color: skyblue;
+
+}
+.btn-text-link:hover{
+    text decoration : underline;
+
+}
