@@ -51,9 +51,9 @@ public class UsrArticleController {
   @RequestMapping("/usr/article/detail")
   public String showDetail(HttpServletRequest req,Model model,int id) {
     Rq rq = (Rq) req.getAttribute("rq");
-    //Rq rq = (Rq) req.getAttribute("rq");
+
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
-   //model.addAttribute("article",article);
+    // model.addAttribute("article",article);
     return "/usr/article/detail";
   }
 
@@ -73,7 +73,7 @@ public class UsrArticleController {
   public String doDelete(HttpServletRequest req,int id) {
 
     Rq rq = (Rq) req.getAttribute("rq");
-    //Rq rq = (Rq) req.getAttribute("rq");
+
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
 
 
@@ -91,7 +91,7 @@ public class UsrArticleController {
     return Ut.jsReplace( Ut.f("%d번 게시물을 삭제했다.",id),"../article/list");
   }
   @RequestMapping("/usr/article/modify")
-  public String  showModify(HttpServletRequest req, int id,String title,String body) {
+  public String  showModify(HttpServletRequest req, int id,Model model) {
     Rq rq = (Rq) req.getAttribute("rq");
     //아이디 구해야해서 필요함
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
@@ -102,6 +102,7 @@ public class UsrArticleController {
     if(actorCanModifyRd.isFail()){
       return rq.historyBackJsOnView(actorCanModifyRd.getMsg());
     }
+    //model.addAttribute("article",article);
     return "/usr/article/modify";
   }
   @RequestMapping("/usr/article/doModify")
