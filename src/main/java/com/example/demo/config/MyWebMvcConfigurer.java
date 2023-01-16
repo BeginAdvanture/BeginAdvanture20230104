@@ -1,10 +1,11 @@
-package com.example.demo;
+package com.example.demo.config;
 
 import com.example.demo.interceptor.BeforeActionInterceptor;
 import com.example.demo.interceptor.NeedLoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -14,7 +15,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
   @Autowired
   NeedLoginInterceptor needLoginInterceptor;
   @Override
-  public void addInterceptor(InterceptorRegistration registry){
+  public void addInterceptors(InterceptorRegistry registry){
     registry.addInterceptor(beforeActionInterceptor)
         .addPathPatterns("/**")
         .excludePathPatterns("/css/**")
@@ -23,13 +24,10 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
     registry.addInterceptor(needLoginInterceptor)
           .addPathPatterns("/usr/article/write")
-          .excPathPatterns("/usr/article/doWrite")
-          .excPathPatterns("/usr/article/modify")
-          .excPathPatterns("/usr/article/doModify")
-        .excPathPatterns("/usr/article/doDelete");
-
-
-
+          .addPathPatterns("/usr/article/doWrite")
+          .addPathPatterns("/usr/article/modify")
+          .addPathPatterns("/usr/article/doModify")
+          .addPathPatterns("/usr/article/doDelete");
 
   }
 
