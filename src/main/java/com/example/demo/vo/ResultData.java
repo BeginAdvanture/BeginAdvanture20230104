@@ -3,6 +3,7 @@ package com.example.demo.vo;
 import lombok.Getter;
 
 public class ResultData<DT> {
+
   @Getter
   private String resultCode;
   @Getter

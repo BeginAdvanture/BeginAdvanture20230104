@@ -1,8 +1,12 @@
 package com.example.demo.vo;
 
+import com.example.demo.utill.Ut;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+
+import java.io.IOException;
 
 public class Rq {
 
@@ -11,9 +15,12 @@ public class Rq {
   private boolean isLogined;
   @Getter
   private  int loginedMemberId;
+  private HttpServletRequest req;
+  private HttpServletResponse resp;
+  public Rq(HttpServletRequest req, HttpServletResponse resp) {
+    this.req = req;
+    this.resp = resp;
 
-
-  public Rq(HttpServletRequest req) {
     HttpSession httpSession = req.getSession();
     int loginedMemberId = 0;
     boolean isLogined = false;
@@ -27,4 +34,24 @@ public class Rq {
   }
 
 
+  public void printHistoryBackJs(String msg) {
+    resp.setContentType("text/html; charset=UTF-8");
+    println("<script>");
+    if(Ut.empty(msg)){
+      println("alert('"+msg+"');");
+    }
+    println("history.back();");
+
+    println("</script>");
+  }
+  public void print(String str){
+    try {
+      resp.getWriter().append(str);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  public void println(String str){
+    print(str+"\n");
+  }
 }

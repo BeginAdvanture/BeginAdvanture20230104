@@ -1,7 +1,7 @@
 # DB 생성
-DROP DATABASE IF EXISTS exam_2023;
-CREATE DATABASE exam_2023;
-USE exam_2023;
+DROP DATABASE IF EXISTS sb_app_2022_t;
+CREATE DATABASE sb_app_2022_t;
+USE sb_app_2022_t;
 
 # 게시물 테이블 생성
 CREATE TABLE article (
@@ -32,8 +32,7 @@ INSERT INTO article
 title ='제목3',
 `body` = '내용3';
 
-SELECT * FROM article
-SELECT LAST_INSERT_ID();
+
 
 # 회원 테이블 생성
 CREATE TABLE `member` (
@@ -84,12 +83,8 @@ loginPw = 'user2',
 cellphoneNo = '010222222',
 email = 'ssfu777@gmail.com';
 
-SELECT * FROM `member`;
-
-
-SELECT * FROM `member`;
 #게시물 회원정보 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER `updateDate`;
 
 # 기존 게시물의 작성자를 2번으로 지정
 UPDATE article
