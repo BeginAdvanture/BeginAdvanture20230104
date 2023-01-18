@@ -107,23 +107,22 @@ public class UsrArticleController {
   }
   @RequestMapping("/usr/article/doModify")
   @ResponseBody
-  public ResultData<Integer> doModify(HttpServletRequest req, int id,String title,String body) {
+  public String doModify(HttpServletRequest req, int id,String title,String body) {
     Rq rq = (Rq) req.getAttribute("rq");
     //Rq rq = (Rq) req.getAttribute("rq");
 
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
 
     if( article == null){
-      return ResultData.from("F-1", Ut.f("%d번 게시물이 존재하지 않습니다.",id));
+      return Ut.jsHistoryBack(Ut.f("%d번 게시물이 존재하지 않습니다.",id));
     }
     articleService.modifyArticle(id,title,body);
     ResultData actorCanModifyRd  = articleService.actorCanModify(rq.getLoginedMemberId(),article);
     if(actorCanModifyRd.isFail()){
-      return actorCanModifyRd;
+      return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
     }
-    return  ResultData.from("S-1", Ut.f("%d번 게시물을 수정했다.",id),"id",id);
+    articleService.modifyArticle(id,title,body);
+    return Ut.jsReplace(Ut.f("%d번 게시물이 수정 되었습니다.",id),Ut.f("../article/detail",id));
   }
-
-
 
 }
