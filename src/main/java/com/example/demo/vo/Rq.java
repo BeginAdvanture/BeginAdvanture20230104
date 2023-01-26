@@ -83,4 +83,9 @@ public class Rq {
   public String jsReplace(String msg,String uri) {
     return Ut.jsReplace(msg,uri);
   }
+  //이 메서드는 Rq 객체가 자연스럽게 생성되도록 유도하는 역할
+  //BeforeActionInterceptor 호출 무조건 적으로 필요
+  public void initOnBeforeActionInterceptor() {
+
+  }
 }
