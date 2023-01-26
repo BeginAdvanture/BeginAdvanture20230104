@@ -1,5 +1,6 @@
 package com.example.demo.vo;
 
+import com.example.demo.service.MemberService;
 import com.example.demo.utill.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +19,10 @@ public class Rq {
   private HttpServletRequest req;
   private HttpServletResponse resp;
   private HttpSession session;
-  public Rq(HttpServletRequest req, HttpServletResponse resp) {
+  @Getter
+  private Member loginedMember;
+
+  public Rq(HttpServletRequest req, HttpServletResponse resp, MemberService memberService) {
     this.req = req;
     this.resp = resp;
     this.session = req.getSession();
@@ -29,9 +33,11 @@ public class Rq {
     if(httpSession.getAttribute("loginMemberId")!=null){
       isLogined = true;
       loginedMemberId = (int) session.getAttribute("logindMemberId");
+      loginedMember = memberService.getMemberById(loginedMemberId);
     }
     this.isLogined = isLogined;
     this.loginedMemberId =loginedMemberId;
+    this.loginedMember = loginedMember;
   }
 
 
@@ -63,5 +69,13 @@ public class Rq {
     req.setAttribute("msg",msg);
     req.setAttribute("historyBack",true);
     return "common/js";
+  }
+
+  public String jsHistoryBack(String msg) {
+    return Ut.jsHistoryBack(msg);
+  }
+
+  public String jsReplace(String msg,String uri) {
+    return Ut.jsReplace(msg,uri);
   }
 }
