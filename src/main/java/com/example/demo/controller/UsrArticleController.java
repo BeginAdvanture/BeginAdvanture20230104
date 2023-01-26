@@ -37,7 +37,7 @@ public class UsrArticleController {
     return "usr/article/write";
   }
   @RequestMapping("/usr/article/doWrite")
-  public String doWrite(String title, String body,String replaceUri) {
+  public String doWrite(int boardId,String title, String body,String replaceUri) {
 
     ////
 
@@ -53,7 +53,7 @@ public class UsrArticleController {
     }
 
 
-    ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(),title,body);
+    ResultData<Integer> writeArticleRd = articleService.writeArticle(rq.getLoginedMemberId(),boardId,title,body);
     int id = writeArticleRd.getData1();
     if(Ut.empty(replaceUri)){
       replaceUri = Ut.f("../article/detail?id=%d",id);
