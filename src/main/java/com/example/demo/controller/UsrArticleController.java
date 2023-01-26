@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import ch.qos.logback.core.model.Model;
 import com.example.demo.service.ArticleService;
+import com.example.demo.service.BoardService;
 import com.example.demo.utill.Ut;
 import com.example.demo.vo.Article;
+import com.example.demo.vo.Board;
 import com.example.demo.vo.ResultData;
 import com.example.demo.vo.Rq;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,9 +19,15 @@ import java.util.List;
 
 @Controller
 public class UsrArticleController {
-
-  @Autowired
   private ArticleService articleService;
+
+  private BoardService boardService;
+
+  public UsrArticleController(ArticleService articleService, BoardService boardService) {
+    this.articleService = articleService;
+    this.boardService = boardService;
+  }
+
 
 
   ///////////////////////////////////// 매서드
@@ -65,12 +73,12 @@ public class UsrArticleController {
 
   @RequestMapping("/usr/article/list")
 
-  public String showList(HttpServletRequest req,Model model) {
+  public String showList(HttpServletRequest req,Model model,int boardId) {
     Rq rq = (Rq) req.getAttribute("rq");
-
+    Board board = boardService.getBoardById(boardId);
     List<Article> articles = articleService.getForPrintArticles(rq.getLoginedMemberId());
+    //model.addAttribute("board",board);
     //model.addAttribute("article",article);
-
     return "usr/article/list";
   }
   @RequestMapping("/usr/article/doDelete")
