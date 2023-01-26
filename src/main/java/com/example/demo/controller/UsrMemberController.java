@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class UsrMemberController {
   private MemberService memberService;
-  public UsrMemberController(MemberService memberService) {
+  private  Rq rq;
+
+  public UsrMemberController(MemberService memberService, Rq rq) {
     this.memberService = memberService;
+    this.rq = rq;
   }
 
   @RequestMapping("/usr/member/doJoin")
@@ -58,9 +61,9 @@ public class UsrMemberController {
 
   @RequestMapping("/usr/member/doLogin")
   @ResponseBody
-  public String doLogin(HttpServletRequest req, String loginId, String loginPw)
+  public String doLogin(String loginId, String loginPw)
   {
-    Rq rq = (Rq) req.getAttribute("rq");
+
     if(rq.isLogined()){
       return rq.jsHistoryBack("이미 로그인 되었습니다.");
     }
@@ -85,9 +88,9 @@ public class UsrMemberController {
   ///////로그아웃
   @RequestMapping("/usr/member/doLogout")
   @ResponseBody
-  public String doLogout(HttpServletRequest req)
+  public String doLogout()
   {
-    Rq rq = (Rq) req.getAttribute("rq");
+
     if(!rq.isLogined()){
       return rq.jsHistoryBack("이미 로그아웃 되었습니다.");
     }

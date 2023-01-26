@@ -6,9 +6,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
+@Component
+@Scope(value = "request",proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Rq {
 
 
@@ -38,6 +42,7 @@ public class Rq {
     this.isLogined = isLogined;
     this.loginedMemberId =loginedMemberId;
     this.loginedMember = loginedMember;
+    this.req.setAttribute("rq",this);
   }
 
 
