@@ -8,8 +8,8 @@
     <div>
       게시물 개수 : ${articlesCount}건
     </div>
-    <div class="table-box-type-1">
-      <table border="1">
+    <div class="table-box-type-1 mt-3">
+      <table class="table table-fixed">
         <colgroup>
           <col width="80"/>
           <col width="150"/>
@@ -30,11 +30,15 @@
         <c:forEach var="article" items="${articles}">
           <tr>
             <th>${article.id}"</th>
-            <th>${article.regDate}"</th>
-            <th>${article.updateDate}"</th>
+            <th>${article.regDate.substring(2,16)}"</th>
+            <th>${article.updateDate.substring(2,16)}"</th>
             <th>${article.extra__writerName}"</th>
-            <th>${article.title}"</th>
-            <th><a class ="btn-text-link" href="../article/detail?id=${article.id}" ></a></th>
+
+            <th>
+              <a class ="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}" >
+              ${article.title}
+              </a>
+            </th>
           </tr>
         </c:forEach>
         </tbody>
