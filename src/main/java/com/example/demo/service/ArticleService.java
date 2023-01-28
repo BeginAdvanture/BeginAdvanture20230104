@@ -44,7 +44,7 @@ public class ArticleService {
      */
     int limitStart = (page -1) * itemsCountInAPage;
     int limitTake = itemsCountInAPage;
-    List<Article> articles = articleRepository.getArticles(boardId,limitStart,-1,searchKeywordTypeCode,searchKeyword);
+    List<Article> articles = articleRepository.getForPrintArticles(boardId,limitStart,-1,searchKeywordTypeCode,searchKeyword);
 
     for(Article article:articles){
       upDateForPrintData(actorId, article);

@@ -19,19 +19,28 @@ public interface ArticleRepository {
     """)
   public void writeArticle(@Param("memberId") int memberId, @Param("boardId") int boardId, @Param("title")String title, @Param("body")String body);
   @Select("""
-    SELECT A.*,
-    M.nickname AS extra__writerName
-    FROM article AS A
-    LEFT JOIN member AS M
-    ON A.memberId = M.id
-    WHERE 1
-    AND A.id = #{id}
-    """)
+      <script>
+      SELECT A.*,
+      M.nickname AS extra__writerName,
+      IFNULL(SUM(RP.point,0)) AS extra_sumReactionPoint,
+      IFNULL(IF(SUM(RP.point &gt; 0,RP.point,0),0)) AS extra_goodReactionPoint,
+      IFNULL(IF(SUM(RP.point &lt; 0,RP.point,0),0)) AS extra_bedReactionPoint
+      FROM article AS A
+      LEFT JOIN `member` AS M
+      ON A.memberId = M.id
+      LEFT JOIN reactionPoint AS RP
+      ON RP.relTypeCode = 'article'
+      AND A.id = RP.relId
+      WHERE 1
+      AND A.id = #{id}
+      GROUP BY A.id
+      </script>
+      """)
   public Article getForPrintArticle(@Param("id") int id);
   @Delete("""
     DELETE
     FROM article
-    WherE id = #{id}
+    WHERE id = #{id}
     """)
   public void deleteArticle(@Param("id")int id);
   @Update("""
@@ -105,13 +114,14 @@ public interface ArticleRepository {
           LIMIT #{limitStart}, #{limitTake}
         </if>
       ) AS A
-      LEFT JOIN reactionPoint AS RP\s
+      LEFT JOIN reactionPoint AS RP
       ON RP.relTypeCode = 'article'
       AND A.id = RP.relId
-      GROUP BY A.id;
+      GROUP BY A.id
       </script>
       """)
-  public List<Article> getArticles(@Param("boardId") int boardId, @Param("limitStart") int limitStart, @Param("limitTake") int limitTake, @Param("searchKeywordTypeCode") String searchKeywordTypeCode, @Param("searchKeyword") String searchKeyword);
+  public List<Article> getForPrintArticles(@Param("boardId") int boardId, @Param("limitStart") int limitStart, @Param("limitTake") int limitTake, @Param("searchKeywordTypeCode") String searchKeywordTypeCode, @Param("searchKeyword") String searchKeyword);
+
   @Select("""
     <script>
     SELECT COUNT(*) AS cnt

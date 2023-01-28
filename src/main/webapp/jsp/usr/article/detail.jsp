@@ -58,8 +58,12 @@
             <td>${article.extra__writerName}</td>
           </tr>
           <tr>
-            <th>조회수</th>
+            <th>조회</th>
             <span class="badge badge-primary article-detail__hit-count">${article.hitCount}</span>
+          </tr>
+          <tr>
+            <th>추천</th>
+            <span class="badge badge-primary article-detail__hit-count">${article.extra_goodReactionPoint}</span>
           </tr>
           <tr>
             <th>제목</th>
