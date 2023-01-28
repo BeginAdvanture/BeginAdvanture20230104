@@ -13,7 +13,7 @@
       <div class="flex-grow"></div>
       <form>
         <input type="hidden" name="boardId" value="${param.boardId}">
-        
+
         <select data-value="${param.searchKeywordTypeCode}" name="searchKeywordTypeCode" class="select select-bordered">
           <option disabled="disabled">검색 타입</option>
           <option value="title">제목</option>

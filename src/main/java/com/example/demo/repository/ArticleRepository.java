@@ -141,4 +141,12 @@ public interface ArticleRepository {
 
   )
   public int increaseHitCount(@Param("id") int id);
+  @Select("""
+    <script>
+    SELECT hitCount
+    FROM article
+    WHERE id = #{id}
+    </script>
+    """)
+  public int getArticleHitCount(@Param("id") int id);
 }
