@@ -9,8 +9,7 @@
 </script>
 <script>
   function ArticleDetail__increaseHitCount(){
-  $.get(
-    '../usr/article/doIncreaseHitCountRd',
+  $.get('../usr/article/doIncreaseHitCountRd',
     {
       id: params.id,
       ajaxMode: 'Y'
@@ -21,7 +20,7 @@
   $(function){
 
      ArticleDetail__increaseHitCount();
-  }
+  })
 </script>
 
 <section class="mt-5 con-min-width">
