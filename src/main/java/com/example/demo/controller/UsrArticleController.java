@@ -66,6 +66,11 @@ public class UsrArticleController {
   @RequestMapping("/usr/article/detail")
   public String showDetail(Model model,int id) {
 
+    ResultData increaseHitCount = articleService.increaseHitCount(id);
+    if(increaseHitCount.isFail()){
+      return rq.historyBackJsOnView(increaseHitCount.getMsg());
+    }
+
 
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
     // model.addAttribute("article",article);
