@@ -80,7 +80,7 @@ public class UsrArticleController {
       return increaseHitCountRd;
     }
     ResultData<Integer> rd = ResultData.newData(increaseHitCountRd,"hitCount",articleService.getArticleHitCount(id));
-    rd.setData2("");
+    rd.setData2("",id);
     return rd;
   }
 

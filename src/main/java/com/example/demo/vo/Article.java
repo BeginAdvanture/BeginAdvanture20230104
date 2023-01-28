@@ -15,13 +15,22 @@ public class Article {
   private String regDate;
   private String updateDate;
   private String extra__writerName;
+
   private boolean extra__actorCanDelete;
   private boolean extra__actorCanModify;
+
+  private int extra_sumReactionPoint;
+  private int extra_goodReactionPoint;
+  private int extra_bedReactionPoint;
   private String hitCount;
+  private String extra__reactionPoint;
+
   public String getRegDateForPrint(){
     return regDate.substring(2,16);
   }
   public String getUpdateDateForPrint(){
     return updateDate.substring(2,16);
   }
+
+
 }
