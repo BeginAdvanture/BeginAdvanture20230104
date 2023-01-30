@@ -14,16 +14,16 @@ public class Article {
   private int memberId;
   private String regDate;
   private String updateDate;
-  private String extra__writerName;
-
-  private boolean extra__actorCanDelete;
-  private boolean extra__actorCanModify;
-
-  private int extra_sumReactionPoint;
-  private int extra_goodReactionPoint;
-  private int extra_bedReactionPoint;
   private String hitCount;
   private String extra__reactionPoint;
+
+  private int goodReactionPoint;
+  private int badReactionPoint;
+
+
+  private String extra__writerName;
+  private boolean extra__actorCanDelete;
+  private boolean extra__actorCanModify;
 
   public String getRegDateForPrint(){
     return regDate.substring(2,16);

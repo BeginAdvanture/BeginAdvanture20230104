@@ -35,7 +35,7 @@
         </tr>
         <tr>
           <th>추천</th>
-          <span class="badge badge-primary article-detail__hit-count">${article.extra_goodReactionPoint}</span>
+          <span class="badge badge-primary">${article.goodReactionPoint}</span>
         </tr>
         <tr>
           <th>작성자</th>

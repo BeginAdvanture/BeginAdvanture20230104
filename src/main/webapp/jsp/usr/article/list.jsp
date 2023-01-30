@@ -55,7 +55,7 @@
             <th>${article.regDate.substring(2,16)}"</th>
             <th>${article.updateDate.substring(2,16)}"</th>
             <th>${article.hitCount}"</th>
-            <th>${article.extra_goodReactionPoint}"</th>
+            <th>${article.goodReactionPoint}"</th>
             <th>${article.extra__writerName}"</th>
 
             <th>
