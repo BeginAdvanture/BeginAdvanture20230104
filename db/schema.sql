@@ -197,3 +197,23 @@ CREATE TABLE reactionPoint(
 	relTypeCode ='article',
 	relId = 1,
 	`point` = -1;
+
+
+/*
+
+select A.*,
+ifnull(sum(RP.point,0)) as extra_sumReactionPoint,
+IFNULL(if(SUM(RP.point > 0,RP.point,0),0)) AS extra_goodReactionPoint,
+IFNULL(IF(SUM(RP.point < 0,RP.point,0),0)) AS extra_bedReactionPoint
+from(
+		SELECT A.*,
+    M.nickname AS extra__writerName
+    FROM article AS A
+    LEFT JOIN `MEMBER` AS M
+    ON A.memberId = M.id
+)   AS A
+left join reactionPoint as RP
+on RP.relTypeCode = 'article'
+and A.id = RP.relId
+group by A.id;
+*/
