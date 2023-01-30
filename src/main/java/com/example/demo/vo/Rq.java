@@ -86,6 +86,18 @@ public class Rq {
   //이 메서드는 Rq 객체가 자연스럽게 생성되도록 유도하는 역할
   //BeforeActionInterceptor 호출 무조건 적으로 필요
   public void initOnBeforeActionInterceptor() {
+  }
 
+  public  String getCurrentUri(){
+    String currentUri = (String)req.getAttribute("javax.servlet.forward.request_uri");
+    String queryString = req.getQueryString();
+    if(queryString != null && queryString.length() > 0){
+      currentUri += "?" + queryString;
+    }
+    return currentUri;
+  }
+
+  public String getEncodedCurrentUri(){
+    return Ut.getUriEncoded(getCurrentUri());
   }
 }
