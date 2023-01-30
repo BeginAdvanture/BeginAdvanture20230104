@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import ch.qos.logback.core.model.Model;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.ReactionPointService;
 import com.example.demo.utill.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.Board;
@@ -24,10 +25,12 @@ public class UsrArticleController {
 
   private BoardService boardService;
   private Rq rq;
-  public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq) {
+  private ReactionPointService reactionPointService;
+  public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq,ReactionPointService reactionPointService) {
     this.articleService = articleService;
     this.boardService = boardService;
     this.rq = rq;
+    this.reactionPointService = reactionPointService;
   }
 
 
@@ -67,7 +70,7 @@ public class UsrArticleController {
   public String showDetail(Model model,int id) {
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
     // model.addAttribute("article",article);
-    boolean actorCanMakeReactionPoint = articleService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),id);
+    boolean actorCanMakeReactionPoint = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),"article",id);
 
     // model.addAttribute("actorCanMakeReactionPoint",actorCanMakeReactionPoint);
     return "/usr/article/detail";
