@@ -51,4 +51,24 @@ public class ReactionPointService {
     return ResultData.from("S-1","싫어요");
   }
 
+  public ResultData deleteGoodReactionPoint(int actorId, String relTypeCode, int relId) {
+    reactionPointRepository.deleteReactionPoint(actorId, relTypeCode, relId);
+    switch(relTypeCode){
+      case "article":
+        articleService.decreaseGoodReactionPoint(relId);
+
+        break;
+    }
+    return ResultData.from("S-1","좋아요 수가 감소하였습니다.");
+  }
+  public ResultData deleteBadReactionPoint(int actorId, String relTypeCode, int relId) {
+    reactionPointRepository.deleteReactionPoint(actorId, relTypeCode, relId);
+    switch(relTypeCode){
+      case "article":
+        articleService.decreaseBadReactionPoint(relId);
+
+        break;
+    }
+    return ResultData.from("S-1","싫어요 수가 감소하였습니다.");
+  }
 }

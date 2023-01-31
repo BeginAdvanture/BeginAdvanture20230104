@@ -161,6 +161,7 @@ public class UsrArticleController {
     //model.addAttribute("article",article);
     return "/usr/article/modify";
   }
+
   @RequestMapping("/usr/article/doModify")
   @ResponseBody
   public String doModify( int id,String title,String body) {

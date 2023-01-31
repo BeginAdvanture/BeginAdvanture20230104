@@ -4,6 +4,7 @@ import com.example.demo.repository.ArticleRepository;
 import com.example.demo.utill.Ut;
 import com.example.demo.vo.Article;
 import com.example.demo.vo.ResultData;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,8 +133,33 @@ public class ArticleService {
       return ResultData.from("F-1","해당 게시물은 존재하지 않습니다."
           ,"affectedRowsCount",affectedRowsCount);
     }
+    return ResultData.from("S-1","싫어요 수가 증가하였다"
+        ,"affectedRowsCount",affectedRowsCount);
+
+  }
+
+  public ResultData decreaseGoodReactionPoint(int relId) {
+    int affectedRowsCount = articleRepository.decreaseGoodReactionPoint(relId);
+    if(affectedRowsCount == 0){
+      return ResultData.from("F-1","해당 게시물은 존재하지 않습니다."
+          ,"affectedRowsCount",affectedRowsCount);
+    }
+    return ResultData.from("S-1","좋아요 수가 감소하였다"
+        ,"affectedRowsCount",affectedRowsCount);
+
+  }
+
+
+  public ResultData decreaseBadReactionPoint(int relId) {
+    int affectedRowsCount = articleRepository.decreaseBadReactionPoint(relId);
+    if(affectedRowsCount == 0){
+      return ResultData.from("F-1","해당 게시물은 존재하지 않습니다."
+          ,"affectedRowsCount",affectedRowsCount);
+    }
     return ResultData.from("S-1","싫어요 수가 감소하였다"
         ,"affectedRowsCount",affectedRowsCount);
 
   }
+
+
 }
