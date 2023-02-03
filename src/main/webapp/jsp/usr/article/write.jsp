@@ -27,16 +27,6 @@
               <option value="1"></option>
               <option value="2"></option>
             </select>
-            <!--
-            <label>
-              공지
-              <input type ="radio"  name ="boardId" value="1"/>
-            </label>
-            <label>
-              자유
-              <input type ="radio"  name ="boardId" value="2"/>
-            </label>
-            -->
           </td>
         </tr>
         <tr>
@@ -62,10 +52,6 @@
 
       </table>
     </form>
-    <div class="btns">
-
-    </div>
   </div>
-
 </section>
 <%@ include file = "../common/foot.jspf%>
