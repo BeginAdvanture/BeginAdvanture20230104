@@ -1,9 +1,12 @@
 package com.example.demo.repository;
 
+import com.example.demo.vo.Reply;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface ReplyRepository {
@@ -25,4 +28,6 @@ public interface ReplyRepository {
       SELECT LAST_INSERT_ID()
       """)
   public int getLastInsertId();
+
+  List<Reply> getForPrintReplies(@Param("relTypeCode")String relTypeCode,@Param("relId") int relId);
 }

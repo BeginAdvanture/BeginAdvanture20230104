@@ -29,3 +29,7 @@ body{
 .reply-list__body > div {
     min-height: 50px;
 }
+.modifyAndDelete-btn{
+    text-decoration : underline;
+    color:black;
+}

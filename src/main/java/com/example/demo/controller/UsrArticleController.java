@@ -4,11 +4,9 @@ import ch.qos.logback.core.model.Model;
 import com.example.demo.service.ArticleService;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.ReactionPointService;
+import com.example.demo.service.ReplyService;
 import com.example.demo.utill.Ut;
-import com.example.demo.vo.Article;
-import com.example.demo.vo.Board;
-import com.example.demo.vo.ResultData;
-import com.example.demo.vo.Rq;
+import com.example.demo.vo.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +20,16 @@ import java.util.List;
 @Controller
 public class UsrArticleController {
   private ArticleService articleService;
-
+  private ReplyService replyService;
   private BoardService boardService;
   private Rq rq;
   private ReactionPointService reactionPointService;
-  public UsrArticleController(ArticleService articleService, BoardService boardService, Rq rq,ReactionPointService reactionPointService) {
+  public UsrArticleController(ReplyService replyService,ArticleService articleService, BoardService boardService, Rq rq,ReactionPointService reactionPointService) {
     this.articleService = articleService;
     this.boardService = boardService;
     this.rq = rq;
     this.reactionPointService = reactionPointService;
+    this.replyService = replyService;
   }
 
 
@@ -73,7 +72,7 @@ public class UsrArticleController {
 
 
     // model.addAttribute("actorCanMakeReaction",actorCanMakeReactionPointRd.isSuccess());
-   // List<Reply> replies = replyService.getForPrintReplies(rq.LoginedMemberId,"article");
+   List<Reply> replies = replyService.getForPrintReplies(rq.LoginedMemberId,"article");
 
     // model.addAttribute("replies",replies);
 

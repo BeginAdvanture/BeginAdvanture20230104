@@ -1,5 +1,12 @@
 package com.example.demo.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reply {
   private int id;
 
@@ -41,4 +48,6 @@ public class Reply {
   public String getForPrintBody(){
     return body.replaceAll("\n","<br>");
   }
+
+
 }

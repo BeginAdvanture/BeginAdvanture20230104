@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class ArticleService {
 
-  @Autowired
+
   private ArticleRepository articleRepository;
 
   public ArticleService(ArticleRepository articleRepository){
@@ -21,7 +21,7 @@ public class ArticleService {
 
   }
 
-  public ResultData writeArticle(int memberId, int boardId, String title, String body) {
+  public ResultData<Integer> writeArticle(int memberId, int boardId, String title, String body) {
    articleRepository.writeArticle(memberId,boardId,title,body);
 
    int id = articleRepository.getLastInsertId();
@@ -35,7 +35,9 @@ public class ArticleService {
     return article;
   }
 
-  public List<Article> getForPrintArticles(int actorId, int boardId, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage, int page) {
+  public List<Article> getForPrintArticles(int actorId, int boardId,
+                                           String searchKeywordTypeCode, String searchKeyword,
+                                           int itemsCountInAPage, int page) {
     /*
     SELECT *
     FROM article
@@ -45,7 +47,8 @@ public class ArticleService {
      */
     int limitStart = (page -1) * itemsCountInAPage;
     int limitTake = itemsCountInAPage;
-    List<Article> articles = articleRepository.getForPrintArticles(boardId,limitStart,-1,searchKeywordTypeCode,searchKeyword);
+    List<Article> articles = articleRepository.getForPrintArticles(boardId
+        ,limitStart,-1,searchKeywordTypeCode,searchKeyword);
 
     for(Article article:articles){
       upDateForPrintData(actorId, article);
