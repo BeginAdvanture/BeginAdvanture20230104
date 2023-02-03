@@ -40,12 +40,11 @@ public class UsrArticleController {
   public String showWrite(HttpServletRequest req) {
     return "usr/article/write";
   }
+
   @RequestMapping("/usr/article/doWrite")
+  @ResponseBody
   public String doWrite(int boardId,String title, String body,String replaceUri) {
 
-    ////
-
-  //}
     if(rq.isLogined()==false){
       return rq.jsHistoryBack("로그인 후 이용하세요");
     }
