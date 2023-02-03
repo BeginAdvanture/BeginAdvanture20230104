@@ -16,7 +16,6 @@ import java.io.IOException;
 public class Rq {
 
 
-
   @Getter
   private boolean isLogined;
   @Getter

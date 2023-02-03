@@ -21,8 +21,8 @@ public class ReplyService {
     this.replyRepository = replyRepository;
   }
 
-  public ResultData<Integer> writeArticle(int actorId, int relId, String relTypeCode, String body) {
-    replyRepository.writeArticle(actorId,relTypeCode,relId,body);
+  public ResultData<Integer> writeReply(int actorId, int relId, String relTypeCode, String body) {
+    replyRepository.writeReply(actorId,relTypeCode,relId,body);
 
     int id = replyRepository.getLastInsertId();
     return ResultData.from("S-1", Ut.f("%d번 댓글이 생성되었습니다.",id),"id",id);
@@ -65,5 +65,28 @@ public class ReplyService {
       return ResultData.from("F-2","권한이 없습니다.");
     }
     return ResultData.from("S-1","게시물 삭제가 가능합니다.");
+  }
+
+/*
+  public Reply deleteReply(Member actor,int id) {
+    Reply reply = replyRepository.getForPrintReply(id);
+
+    upDateForPrintData(actor,reply);
+    return reply;
+  }
+*/
+  public Reply getForPrintReply(Member actor, int id) {
+    Reply reply = replyRepository.getForPrintReply(id);
+
+    upDateForPrintData(actor,reply);
+    return reply;
+
+    // return replyRepository.getForPrintReply(id);
+  }
+
+  public ResultData deleteReply(int id) {
+    replyRepository.deleteReply(id);
+
+    return ResultData.from("S-1",Ut.f("%d번 댓글을 삭제하였습니다.",id));
   }
 }

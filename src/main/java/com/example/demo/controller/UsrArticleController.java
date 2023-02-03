@@ -72,7 +72,7 @@ public class UsrArticleController {
 
 
     // model.addAttribute("actorCanMakeReaction",actorCanMakeReactionPointRd.isSuccess());
-   List<Reply> replies = replyService.getForPrintReplies(rq.LoginedMemberId,"article");
+    //List<Reply> replies = replyService.getForPrintReplies(rq.loginedMemberId,"article","id");
 
     // model.addAttribute("replies",replies);
 
