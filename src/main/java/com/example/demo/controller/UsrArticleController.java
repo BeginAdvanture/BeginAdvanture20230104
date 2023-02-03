@@ -70,8 +70,15 @@ public class UsrArticleController {
     Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(),id);
     // model.addAttribute("article",article);
     ResultData actorCanMakeReactionPointRd = reactionPointService.actorCanMakeReactionPoint(rq.getLoginedMemberId(),"article",id);
-    // model.addAttribute("actorCanMakeReaction",actorCanMakeReactionPointRd.isSuccess());
 
+
+    // model.addAttribute("actorCanMakeReaction",actorCanMakeReactionPointRd.isSuccess());
+   // List<Reply> replies = replyService.getForPrintReplies(rq.LoginedMemberId,"article");
+
+    // model.addAttribute("replies",replies);
+
+
+    /////////////
     if(actorCanMakeReactionPointRd.getResultCode().equals("F-2")){
       int sumReactionPointByMemberId = (int) actorCanMakeReactionPointRd.getData1();
 

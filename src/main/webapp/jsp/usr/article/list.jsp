@@ -51,12 +51,12 @@
         <tbody>
         <c:forEach var="article" items="${articles}">
           <tr>
-            <th>${article.id}"</th>
-            <th>${article.regDate.substring(2,16)}"</th>
-            <th>${article.updateDate.substring(2,16)}"</th>
-            <th>${article.hitCount}"</th>
-            <th>${article.goodReactionPoint}"</th>
-            <th>${article.extra__writerName}"</th>
+            <th>${article.id}</th>
+            <th>${article.forPrintTypeRegDate}</th>
+            <th>${article.forPrintTypeUpdateDate}</th>
+            <th>${article.hitCount}</th>
+            <th>${article.goodReactionPoint}</th>
+            <th>${article.extra__writerName}</th>
 
             <th>
               <a class ="btn-text-link block w-full truncate" href="../article/detail?id=${article.id}" >
