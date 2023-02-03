@@ -187,4 +187,14 @@ public interface ArticleRepository {
       </script>
       """)
   public int decreaseBadReactionPoint(@Param("id") int id);
+  @Select("""
+    <script>
+    SELECT *
+    FROM article
+    WHERE id = #{id}
+    </script>
+    """)
+  Article getArticle(@Param("id") int id);
+
+
 }
