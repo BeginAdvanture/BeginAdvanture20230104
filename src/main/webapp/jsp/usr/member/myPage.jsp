@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding= "UTF-8"%>
+<%@ page import="com.sbs.exam.sb_app_2022_10_13.util.Ut" %>
 
 <c:set var="pageTitle" value="마이페이지"/>
 <%@ include file="../common/head.jspf" @>

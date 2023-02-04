@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.interceptor.BeforeActionInterceptor;
 import com.example.demo.interceptor.NeedLoginInterceptor;
+import com.example.demo.interceptor.NeedLogoutInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -14,6 +15,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
   BeforeActionInterceptor beforeActionInterceptor;
   @Autowired
   NeedLoginInterceptor needLoginInterceptor;
+  @Autowired
+  NeedLogoutInterceptor needLogoutInterceptor;
   @Override
   public void addInterceptors(InterceptorRegistry registry){
     registry.addInterceptor(beforeActionInterceptor)
@@ -36,6 +39,15 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
           .addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
           .addPathPatterns("/usr/reactionPoint/doCancelBadReaction");
 
+    registry.addInterceptor(needLogoutInterceptor)
+        .addPathPatterns("/usr/member/join")
+        .addPathPatterns("/usr/member/doJoin")
+        .addPathPatterns("/usr/member/login")
+        .addPathPatterns("/usr/member/doLogin")
+        .addPathPatterns("/usr/member/findLoginId")
+        .addPathPatterns("/usr/member/doFindLoginId")
+        .addPathPatterns("/usr/member/findLoginPw")
+        .addPathPatterns("/usr/member/doFindLoginPw");
 
   }
 
