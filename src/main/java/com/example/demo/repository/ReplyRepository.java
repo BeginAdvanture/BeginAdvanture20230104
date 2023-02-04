@@ -45,9 +45,18 @@ public interface ReplyRepository {
       WHERE R.id = #{id}
       """)
   Reply getForPrintReply(@Param("id") int id);
+
   @Delete("""
       DELETE FROM reply
       WHERE id = #{id}
       """)
   void deleteReply(@Param("id") int id);
+
+  @Update("""
+      UPDATE reply
+      SET updateDate
+      `body` = #{body}
+      WHERE id = #{id}
+      """)
+  void modifyReply(@Param("id") int id, @Param("body") String body);
 }

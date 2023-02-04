@@ -76,7 +76,7 @@ public class UsrReplyController {
 
   @RequestMapping("/usr/reply/doDelete")
   @ResponseBody
-  public String doWrite(int id,String replaceUri) {
+  public String doDelete(int id,String replaceUri) {
 
     if(Ut.empty(id)){
       return rq.jsHistoryBack("id 입력해주세요");
@@ -100,6 +100,40 @@ public class UsrReplyController {
         break;
     }
     return rq.jsReplace(deleteReplyRd.getMsg(),replaceUri);
+  }
+
+  @RequestMapping("/usr/reply/doModify")
+  @ResponseBody
+  public String doModify(int id,String body,String replaceUri) {
+
+    if(Ut.empty(id)){
+      return rq.jsHistoryBack("id 입력해주세요");
+    }
+
+    Reply reply = replyService.getForPrintReply(rq.getLoginedMember(),id);
+
+    if(reply==null){
+      return rq.jsHistoryBack(Ut.f("%d번 게시물은 존재하지 않습니다.",id));
+    }
+    if(reply.isExtra__actorCanDelete() == false){
+      return rq.jsHistoryBack(Ut.f("%d번 게시물은 수정 할 권한이 없습니다.",id));
+    }
+
+
+    if(Ut.empty(body)){
+      return rq.jsHistoryBack("body(을)를 입력해주세요");
+    }
+
+
+    ResultData modifyReplyRd = replyService.modifyReply(id,body);
+
+
+    switch (reply.getRelTypeCode()){
+      case "article":
+        replaceUri = Ut.f("../article/detail?id=%d",reply.getRelId());
+        break;
+    }
+    return rq.jsReplace(modifyReplyRd.getMsg(),replaceUri);
   }
 }
 
