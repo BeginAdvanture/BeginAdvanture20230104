@@ -17,19 +17,25 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry){
     registry.addInterceptor(beforeActionInterceptor)
-        .addPathPatterns("/**")
-        .excludePathPatterns("/css/**")
-        .excludePathPatterns("/js/**")
-        .excludePathPatterns("/error");
+          .addPathPatterns("/**")
+          .excludePathPatterns("/css/**")
+          .excludePathPatterns("/js/**")
+          .excludePathPatterns("/error");
 
     registry.addInterceptor(needLoginInterceptor)
+          .addPathPatterns("/usr/article/myPage")
+          .addPathPatterns("/usr/article/checkPassword")
+          .addPathPatterns("/usr/article/doCheckPassword")
           .addPathPatterns("/usr/article/write")
           .addPathPatterns("/usr/article/doWrite")
           .addPathPatterns("/usr/article/modify")
           .addPathPatterns("/usr/article/doModify")
+          .addPathPatterns("/usr/article/doDelete")
           .addPathPatterns("/usr/reactionPoint/doGoodReaction")
           .addPathPatterns("/usr/reactionPoint/doBadReaction")
-          .addPathPatterns("/usr/article/doDelete");
+          .addPathPatterns("/usr/reactionPoint/doCancelGoodReaction")
+          .addPathPatterns("/usr/reactionPoint/doCancelBadReaction");
+
 
   }
 
